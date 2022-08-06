@@ -1,8 +1,5 @@
 package com.example.measure
 
-import com.example.metric.Kilo
-import com.example.metric.meter
-
 data class DynamicMeasure<T, U>(val numerator: Measure<T>, val denominator: Measure<U>) {
     override fun toString() = "$numerator / $denominator"
 }

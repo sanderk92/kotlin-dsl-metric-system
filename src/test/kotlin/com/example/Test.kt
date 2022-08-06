@@ -1,6 +1,7 @@
 package com.example
 
 import com.example.measure.*
+import com.example.measure.metric.*
 import com.example.metric.*
 import org.junit.jupiter.api.Test
 
@@ -27,7 +28,7 @@ class Test {
         val tenDays = 10.days()
 
         val tenKiloMeter = 10.kilometer()
-        val tenFemtoLiter = 10.milliliter()
+        val tenMilliLiter = 10.milliliter()
         val tenNanoGram = 10 of Nano.gram()
 
         val tenKiloMeterPerTenMinutes = 10 of Kilo.meter() per 10.minutes()
@@ -40,7 +41,7 @@ class Test {
         val tenKilometerDividedByFour = tenKiloMeter / 4
 
         val tenKiloMeterPlusTenMeter = tenKiloMeter + tenMeter
-        val oneLiterMinusTenFemtoLiter = oneLiter - tenFemtoLiter
+        val oneLiterMinusTenFemtoLiter = oneLiter - tenMilliLiter
         val tenSecondsPlusOneMinute = tenSeconds + oneMinute
         val oneDayPlusOneMinute = oneDay + oneMinute
 

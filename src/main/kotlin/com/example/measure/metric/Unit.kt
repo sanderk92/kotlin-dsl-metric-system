@@ -1,4 +1,4 @@
-package com.example.metric
+package com.example.measure.metric
 
 import java.math.BigDecimal
 import kotlin.math.abs
