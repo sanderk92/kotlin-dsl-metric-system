@@ -5,6 +5,7 @@ import com.example.measure.metric.UnitMultiplier
 import java.math.BigDecimal
 
 // TODO Divisor scales are incorrect
+// TODO Measure constructor removing trailing zeroes
 
 class Measure<T>(val value: BigDecimal, val unit: Unit<T>) {
     override fun toString() = "$value ${unit.suffix}"
