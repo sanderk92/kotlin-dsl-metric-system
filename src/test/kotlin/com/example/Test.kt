@@ -2,7 +2,6 @@ package com.example
 
 import com.example.measure.*
 import com.example.measure.metric.*
-import com.example.metric.*
 import org.junit.jupiter.api.Test
 
 class Test {
@@ -46,6 +45,9 @@ class Test {
         val oneDayPlusOneMinute = oneDay + oneMinute
 
         val tenLiterPerHourDividedByFour = tenLiterPerHour / 4
+
+        val tenKilometerConvertedToFemtoMeter = tenKiloMeter convertedTo Milli.meter()
+        val tenMilliLiterConvertedToLiter = tenMilliLiter convertedTo Kilo.liter()
 
         println("done")
     }

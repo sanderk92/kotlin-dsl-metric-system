@@ -4,6 +4,10 @@ import java.math.BigDecimal
 import kotlin.math.abs
 
 sealed class Unit<T>(val multiplier: UnitMultiplier, val suffix: String) {
+
+    /**
+     * Normalize a [Unit] to its most basic representation.
+     */
     abstract fun normalize(): Unit<T>
 }
 

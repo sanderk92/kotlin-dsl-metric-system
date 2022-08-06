@@ -4,19 +4,19 @@ class Weight(multiplier: UnitMultiplier) : Unit<Weight>(multiplier, "g") {
     override fun normalize() = Weight(Base)
 }
 
-class Volume(multiplier: UnitMultiplier) : Unit<Volume>(multiplier, "l"){
+class Volume(multiplier: UnitMultiplier) : Unit<Volume>(multiplier, "l") {
     override fun normalize() = Volume(Base)
 }
 
-class Length(multiplier: UnitMultiplier) : Unit<Length>(multiplier, "m"){
+class Length(multiplier: UnitMultiplier) : Unit<Length>(multiplier, "m") {
     override fun normalize() = Length(Base)
 }
 
-class Power(multiplier: UnitMultiplier) : Unit<Power>(multiplier, "W"){
+class Power(multiplier: UnitMultiplier) : Unit<Power>(multiplier, "W") {
     override fun normalize() = Power(Base)
 }
 
-fun UnitMultiplier.gram() = Weight(this)
-fun UnitMultiplier.liter() = Volume(this)
-fun UnitMultiplier.meter() = Length(this)
-fun UnitMultiplier.watt() = Power(this)
+fun UnitMultiplier.gram(): Unit<Weight> = Weight(this)
+fun UnitMultiplier.liter(): Unit<Volume> = Volume(this)
+fun UnitMultiplier.meter(): Unit<Length> = Length(this)
+fun UnitMultiplier.watt(): Unit<Power> = Power(this)

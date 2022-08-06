@@ -16,7 +16,7 @@ class Minutes(unitMultiplier: UnitMultiplier) : TimeMultiplier(unitMultiplier, B
 class Hours(unitMultiplier: UnitMultiplier) : TimeMultiplier(unitMultiplier, BigDecimal(3600), "hour")
 class Days(unitMultiplier: UnitMultiplier) : TimeMultiplier(unitMultiplier, BigDecimal(86400), "day")
 
-fun UnitMultiplier.second() = Time(Seconds(this))
-fun UnitMultiplier.minute() = Time(Minutes(this))
-fun UnitMultiplier.hour() = Time(Hours(this))
-fun UnitMultiplier.day() = Time(Days(this))
+fun UnitMultiplier.second(): Unit<Time> = Time(Seconds(this))
+fun UnitMultiplier.minute(): Unit<Time> = Time(Minutes(this))
+fun UnitMultiplier.hour(): Unit<Time> = Time(Hours(this))
+fun UnitMultiplier.day(): Unit<Time> = Time(Days(this))
