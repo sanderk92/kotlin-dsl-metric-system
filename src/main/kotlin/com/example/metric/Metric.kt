@@ -1,19 +1,19 @@
 package com.example.metric
 
 class Weight(multiplier: UnitMultiplier) : Unit<Weight>(multiplier, "g") {
-    override fun adjustMultiplier(multiplier: UnitMultiplier) = Weight(multiplier)
+    override fun normalize() = Weight(Base)
 }
 
 class Volume(multiplier: UnitMultiplier) : Unit<Volume>(multiplier, "l"){
-    override fun adjustMultiplier(multiplier: UnitMultiplier) = Volume(multiplier)
+    override fun normalize() = Volume(Base)
 }
 
 class Distance(multiplier: UnitMultiplier) : Unit<Distance>(multiplier, "m"){
-    override fun adjustMultiplier(multiplier: UnitMultiplier) = Distance(multiplier)
+    override fun normalize() = Distance(Base)
 }
 
 class Power(multiplier: UnitMultiplier) : Unit<Power>(multiplier, "W"){
-    override fun adjustMultiplier(multiplier: UnitMultiplier) = Power(multiplier)
+    override fun normalize() = Power(Base)
 }
 
 fun UnitMultiplier.gram() = Weight(this)

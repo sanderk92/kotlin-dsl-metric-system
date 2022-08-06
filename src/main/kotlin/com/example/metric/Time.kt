@@ -2,11 +2,10 @@ package com.example.metric
 
 import java.math.BigDecimal
 
-// TODO is it okay to always adjustMultiplier to Time(Seconds(..))?
 // TODO Fix prefix/suffix chaos
 
 class Time(multiplier: TimeMultiplier) : Unit<Time>(multiplier, multiplier.prefix) {
-    override fun adjustMultiplier(multiplier: UnitMultiplier) = Time(Seconds(multiplier))
+    override fun normalize() = Time(Seconds(Base))
 }
 
 abstract class TimeMultiplier(multiplier: UnitMultiplier, seconds: BigDecimal, suffix: String) :

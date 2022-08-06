@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import kotlin.math.abs
 
 sealed class Unit<T>(val multiplier: UnitMultiplier, val suffix: String) {
-    abstract fun adjustMultiplier(multiplier: UnitMultiplier): Unit<T>
+    abstract fun normalize(): Unit<T>
 }
 
 sealed class UnitMultiplier(val factor: BigDecimal, val prefix: String)

@@ -17,12 +17,12 @@ infix fun <T : Unit<T>> Number.of(unit: Unit<T>) = Measure(
 
 operator fun <T: Unit<T>> Measure<T>.plus(other: Measure<T>) = Measure(
     value = normalize().value + other.normalize().value,
-    unit = unit.adjustMultiplier(Base),
+    unit = unit.normalize(),
 )
 
 operator fun <T: Unit<T>> Measure<T>.minus(other: Measure<T>) = Measure(
     value = normalize().value - other.normalize().value,
-    unit = unit.adjustMultiplier(Base),
+    unit = unit.normalize(),
 )
 
 operator fun <T : Unit<T>> Measure<T>.div(divisor: Number) = Measure(
@@ -36,7 +36,7 @@ operator fun <T : Unit<T>> Measure<T>.times(multiplier: Number) = Measure(
 
 private fun <T: Unit<T>> Measure<T>.normalize() = Measure(
     value = value * unit.multiplier.factor,
-    unit = unit.adjustMultiplier(Base)
+    unit = unit.normalize()
 )
 
 private fun Number.asBigDecimal() = this.toDouble().toBigDecimal()
