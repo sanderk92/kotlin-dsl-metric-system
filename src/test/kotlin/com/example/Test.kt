@@ -26,8 +26,8 @@ class Test {
         val tenHours = 10.hours()
         val tenDays = 10.days()
 
-        val tenKiloMeter = 10 of Kilo.meter()
-        val tenFemtoLiter = 10 of Femto.liter()
+        val tenKiloMeter = 10.kilometer()
+        val tenFemtoLiter = 10.milliliter()
         val tenNanoGram = 10 of Nano.gram()
 
         val tenKiloMeterPerTenMinutes = 10 of Kilo.meter() per 10.minutes()
@@ -43,6 +43,8 @@ class Test {
         val oneLiterMinusTenFemtoLiter = oneLiter - tenFemtoLiter
         val tenSecondsPlusOneMinute = tenSeconds + oneMinute
         val oneDayPlusOneMinute = oneDay + oneMinute
+
+        val tenLiterPerHourDividedByFour = tenLiterPerHour / 4
 
         println("done")
     }
