@@ -1,48 +1,55 @@
 package com.example.measure
 
 import com.example.measure.metric.Unit
-import com.example.measure.metric.UnitMultiplier
 import java.math.BigDecimal
+import java.math.MathContext
 
-// TODO Divisor scales are incorrect
-// TODO Measure constructor removing trailing zeroes
+class Measure<T> private constructor(val value: BigDecimal, val unit: Unit<T>) {
+    override fun toString() = "${value.toDouble()} ${unit.abbreviation}"
 
-class Measure<T>(val value: BigDecimal, val unit: Unit<T>) {
-    override fun toString() = "$value ${unit.suffix}"
+    companion object {
+        fun <T> create(value: BigDecimal, unit: Unit<T>) = Measure(
+            value = value.stripTrailingZeros(),
+            unit = unit,
+        )
+    }
 }
 
-infix fun <T> Number.of(unit: Unit<T>) = Measure(
-    value = asBigDecimal(),
-    unit = unit,
-)
-
-infix fun <T> Measure<T>.convertedTo(unit: Unit<T>) = Measure(
-    value = normalize().value / unit.multiplier.factor,
-    unit = unit,
-)
-
-operator fun <T> Measure<T>.plus(other: Measure<T>) = Measure(
-    value = normalize().value + other.normalize().value,
-    unit = unit.normalize(),
-)
-
-operator fun <T> Measure<T>.minus(other: Measure<T>) = Measure(
-    value = normalize().value - other.normalize().value,
-    unit = unit.normalize(),
-)
-
-operator fun <T> Measure<T>.div(divisor: Number) = Measure(
-    value = value / divisor.asBigDecimal(),
-    unit = unit,
-)
-operator fun <T> Measure<T>.times(multiplier: Number) = Measure(
-    value = value * multiplier.asBigDecimal(),
-    unit = unit,
-)
-
-private fun <T> Measure<T>.normalize() = Measure(
+fun <T> Measure<T>.normalized() = Measure.create(
     value = value * unit.multiplier.factor,
     unit = unit.normalize()
 )
 
+infix fun <T> Number.of(unit: Unit<T>) = Measure.create(
+    value = asBigDecimal(),
+    unit = unit,
+)
+
+infix fun <T> Measure<T>.convertedTo(unit: Unit<T>) = Measure.create(
+    value = normalized().value / unit.multiplier.factor,
+    unit = unit,
+)
+
+operator fun <T> Measure<T>.plus(other: Measure<T>) = Measure.create(
+    value = normalized().value + other.normalized().value,
+    unit = unit.normalize(),
+)
+
+operator fun <T> Measure<T>.minus(other: Measure<T>) = Measure.create(
+    value = normalized().value - other.normalized().value,
+    unit = unit.normalize(),
+)
+
+operator fun <T> Measure<T>.div(divisor: Number) = Measure.create(
+    value = value / divisor.asBigDecimal(),
+    unit = unit,
+)
+
+operator fun <T> Measure<T>.times(multiplier: Number) = Measure.create(
+    value = value * multiplier.asBigDecimal(),
+    unit = unit,
+)
+
 private fun Number.asBigDecimal() = this.toDouble().toBigDecimal()
+
+private operator fun BigDecimal.div(bigDecimal: BigDecimal) = divide(bigDecimal, MathContext.DECIMAL64)

@@ -3,7 +3,7 @@ package com.example.measure.metric
 import java.math.BigDecimal
 import kotlin.math.abs
 
-sealed class Unit<T>(val multiplier: UnitMultiplier, val suffix: String) {
+sealed class Unit<T>(val multiplier: UnitMultiplier, val abbreviation: String) {
 
     /**
      * Normalize a [Unit] to its most basic representation.
