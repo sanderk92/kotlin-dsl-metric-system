@@ -1,6 +1,8 @@
-package com.example.measure
+package com.example.measure.factory
 
 import com.example.measure.metric.*
+import com.example.measure.of
+import com.example.measure.per
 
 /*
 Factory methods for Measure of Weight

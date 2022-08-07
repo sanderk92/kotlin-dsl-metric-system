@@ -1,6 +1,7 @@
 package com.example
 
 import com.example.measure.*
+import com.example.measure.factory.*
 import com.example.measure.metric.*
 import com.example.measure.metric.Kilo
 import com.example.measure.metric.Milli

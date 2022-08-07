@@ -5,7 +5,7 @@ import java.math.BigDecimal
 import java.math.MathContext
 
 class Measure<T> private constructor(val value: BigDecimal, val metric: Metric<T>) {
-    override fun toString() = "${value.toDouble()} ${metric.multiplier.prefix}${metric.suffix} "
+    override fun toString() = "${value.toDouble()} ${metric.multiplier.prefix}${metric.suffix}"
 
     companion object {
         fun <T> create(value: BigDecimal, metric: Metric<T>) = Measure(
