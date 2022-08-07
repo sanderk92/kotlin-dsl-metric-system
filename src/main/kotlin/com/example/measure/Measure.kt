@@ -1,53 +1,53 @@
 package com.example.measure
 
-import com.example.measure.metric.Unit
+import com.example.measure.metric.Metric
 import java.math.BigDecimal
 import java.math.MathContext
 
-class Measure<T> private constructor(val value: BigDecimal, val unit: Unit<T>) {
-    override fun toString() = "${value.toDouble()} ${unit.abbreviation}"
+class Measure<T> private constructor(val value: BigDecimal, val metric: Metric<T>) {
+    override fun toString() = "${value.toDouble()} ${metric.multiplier.prefix}${metric.suffix} "
 
     companion object {
-        fun <T> create(value: BigDecimal, unit: Unit<T>) = Measure(
+        fun <T> create(value: BigDecimal, metric: Metric<T>) = Measure(
             value = value.stripTrailingZeros(),
-            unit = unit,
+            metric = metric,
         )
     }
 }
 
 fun <T> Measure<T>.normalized() = Measure.create(
-    value = value * unit.multiplier.factor,
-    unit = unit.normalize()
+    value = value * metric.multiplier.factor,
+    metric = metric.normalize()
 )
 
-infix fun <T> Number.of(unit: Unit<T>) = Measure.create(
+infix fun <T> Number.of(metric: Metric<T>) = Measure.create(
     value = asBigDecimal(),
-    unit = unit,
+    metric = metric,
 )
 
-infix fun <T> Measure<T>.convertedTo(unit: Unit<T>) = Measure.create(
-    value = normalized().value / unit.multiplier.factor,
-    unit = unit,
+infix fun <T> Measure<T>.convertedTo(metric: Metric<T>) = Measure.create(
+    value = normalized().value / metric.multiplier.factor,
+    metric = metric,
 )
 
 operator fun <T> Measure<T>.plus(other: Measure<T>) = Measure.create(
     value = normalized().value + other.normalized().value,
-    unit = unit.normalize(),
+    metric = metric.normalize(),
 )
 
 operator fun <T> Measure<T>.minus(other: Measure<T>) = Measure.create(
     value = normalized().value - other.normalized().value,
-    unit = unit.normalize(),
+    metric = metric.normalize(),
 )
 
 operator fun <T> Measure<T>.div(divisor: Number) = Measure.create(
     value = value / divisor.asBigDecimal(),
-    unit = unit,
+    metric = metric,
 )
 
 operator fun <T> Measure<T>.times(multiplier: Number) = Measure.create(
     value = value * multiplier.asBigDecimal(),
-    unit = unit,
+    metric = metric,
 )
 
 private fun Number.asBigDecimal() = this.toDouble().toBigDecimal()

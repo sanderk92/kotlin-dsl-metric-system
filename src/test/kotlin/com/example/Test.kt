@@ -2,6 +2,9 @@ package com.example
 
 import com.example.measure.*
 import com.example.measure.metric.*
+import com.example.measure.metric.Kilo
+import com.example.measure.metric.Milli
+import com.example.measure.metric.Nano
 import org.junit.jupiter.api.Test
 
 class Test {
@@ -48,6 +51,7 @@ class Test {
 
         val tenKilometerConvertedToFemtoMeter = tenKiloMeter convertedTo Milli.meter()
         val tenMilliLiterConvertedToLiter = tenMilliLiter convertedTo Kilo.liter()
+        val tenSecondsConvertedToKiloMinutes = tenSeconds convertedTo Kilo.minute()
 
         println("done")
     }
