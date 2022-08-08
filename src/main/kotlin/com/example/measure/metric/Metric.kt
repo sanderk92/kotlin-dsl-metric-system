@@ -5,6 +5,21 @@ import kotlin.math.abs
 
 sealed class Metric<T>(val multiplier: MetricMultiplier, val suffix: String) {
 
+    override fun equals(other: Any?): Boolean {
+        if (other == null) return false
+        if (other === this) return true
+        if (other !is Metric<*>) return false
+        return other.multiplier == multiplier && other.suffix == suffix
+    }
+
+    override fun hashCode(): Int {
+        return multiplier.hashCode() + suffix.hashCode()
+    }
+
+    override fun toString(): String {
+        return "${multiplier.prefix}${suffix}"
+    }
+
     /**
      * Normalize a [Metric] to its most basic representation.
      */

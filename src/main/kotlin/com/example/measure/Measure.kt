@@ -5,13 +5,27 @@ import java.math.BigDecimal
 import java.math.MathContext
 
 class Measure<T> private constructor(val value: BigDecimal, val metric: Metric<T>) {
-    override fun toString() = "${value.toDouble()} ${metric.multiplier.prefix}${metric.suffix}"
 
     companion object {
         fun <T> create(value: BigDecimal, metric: Metric<T>) = Measure(
             value = value.stripTrailingZeros(),
             metric = metric,
         )
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other == null) return false
+        if (other === this) return true
+        if (other !is Measure<*>) return false
+        return other.value == value && other.metric == metric
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode() + metric.hashCode()
+    }
+
+    override fun toString(): String {
+        return "${value.toPlainString()} $metric"
     }
 }
 
