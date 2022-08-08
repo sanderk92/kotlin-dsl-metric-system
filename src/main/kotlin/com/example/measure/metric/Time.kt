@@ -2,6 +2,8 @@ package com.example.measure.metric
 
 import java.math.BigDecimal
 
+// TODO TimeMultiplier feels like its incorrectly used for this metric
+
 class Time(multiplier: TimeMultiplier) : Metric<Time>(multiplier, multiplier.suffix) {
     override fun normalize() = Time(Seconds(Base))
 }

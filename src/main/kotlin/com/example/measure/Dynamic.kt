@@ -2,6 +2,8 @@ package com.example.measure
 
 import com.example.measure.metric.Metric
 
+// TODO Multiplying a Dynamic with a measure
+
 class Dynamic<T, U> private constructor(val numerator: Measure<T>, val denominator: Measure<U>) {
 
     companion object {
