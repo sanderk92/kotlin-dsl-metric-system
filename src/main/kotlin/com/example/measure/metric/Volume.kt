@@ -5,3 +5,5 @@ class Volume(multiplier: MetricMultiplier) : Metric<Volume>(multiplier, "l") {
 }
 
 fun MetricMultiplier.liter(): Metric<Volume> = Volume(this)
+
+fun liter(): Metric<Volume> = Volume(Base)

@@ -5,3 +5,5 @@ class Power(multiplier: MetricMultiplier) : Metric<Power>(multiplier, "W") {
 }
 
 fun MetricMultiplier.watt(): Metric<Power> = Power(this)
+
+fun watt(): Metric<Power> = Power(Base)

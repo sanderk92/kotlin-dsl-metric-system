@@ -18,3 +18,8 @@ fun MetricMultiplier.second(): Metric<Time> = Time(Seconds(this))
 fun MetricMultiplier.minute(): Metric<Time> = Time(Minutes(this))
 fun MetricMultiplier.hour(): Metric<Time> = Time(Hours(this))
 fun MetricMultiplier.day(): Metric<Time> = Time(Days(this))
+
+fun second(): Metric<Time> = Time(Seconds(Base))
+fun minute(): Metric<Time> = Time(Minutes(Base))
+fun hour(): Metric<Time> = Time(Hours(Base))
+fun day(): Metric<Time> = Time(Days(Base))

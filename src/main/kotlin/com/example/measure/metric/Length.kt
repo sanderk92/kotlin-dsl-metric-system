@@ -5,3 +5,5 @@ class Length(multiplier: MetricMultiplier) : Metric<Length>(multiplier, "m") {
 }
 
 fun MetricMultiplier.meter(): Metric<Length> = Length(this)
+
+fun meter(): Metric<Length> = Length(Base)
