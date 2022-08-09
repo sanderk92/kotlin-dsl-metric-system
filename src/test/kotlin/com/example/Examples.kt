@@ -29,14 +29,12 @@ class Examples {
         val tenKiloWattPerHour = 10 of Kilo.watt per hour
 
         val tenNanoGramPerLiterTimesTwoLiter = (10 of Nano.gram per liter) * (2 of liter)
-        val tenMeterPerSecondTimesTwoMinutes = (10 of Yotta.meter per Femto.second) * (2 of Yotta.minute)
+        val tenMeterPerSecondTimesTwoMinutes = (10 of meter per day) * (2 of day)
 
         val tenGramPlusTenKiloGram = listOf(10 of gram, 10 of Kilo.gram).combined()
         val tenGramMinusTenKiloGram = listOf(10 of gram, 10 of Kilo.gram).deducted()
 
         val tenKilometerConvertedMeter = tenKiloMeter convertTo meter
         val tenLiterConvertedToNanoLiter = tenLiter convertTo Nano.liter
-
-        println("done")
     }
 }

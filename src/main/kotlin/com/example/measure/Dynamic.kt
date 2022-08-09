@@ -1,6 +1,8 @@
 package com.example.measure
 
 import com.example.measure.metric.Metric
+import java.math.BigDecimal
+import java.math.MathContext
 
 class Dynamic<T, U> private constructor(val numerator: Measure<T>, val denominator: Measure<U>) {
 
@@ -41,3 +43,5 @@ operator fun <T, U> Dynamic<T, U>.times(measure: Measure<U>) = Measure.create(
     value = numerator.normalized.value * (measure.normalized.value / denominator.normalized.value),
     metric = numerator.normalized.metric,
 )
+
+private operator fun BigDecimal.div(bigDecimal: BigDecimal) = divide(bigDecimal, MathContext.UNLIMITED)
