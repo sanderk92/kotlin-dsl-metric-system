@@ -39,7 +39,7 @@ infix fun <T> Number.of(metric: Metric<T>) = Measure.create(
     metric = metric,
 )
 
-infix fun <T> Measure<T>.convertedTo(metric: Metric<T>) = Measure.create(
+infix fun <T> Measure<T>.convertTo(metric: Metric<T>) = Measure.create(
     value = normalized.value / metric.multiplier.factor,
     metric = metric,
 )
