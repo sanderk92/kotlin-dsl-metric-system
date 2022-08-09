@@ -34,13 +34,8 @@ val <T> Measure<T>.normalized get() = Measure.create(
     metric = metric.normalize()
 )
 
-infix fun <T> Number.of(metric: Metric<T>) = Measure.create(
+operator fun <T> Int.invoke(metric: Metric<T>) = Measure.create(
     value = this.toDouble().toBigDecimal(),
-    metric = metric,
-)
-
-infix fun <T> Measure<T>.convertTo(metric: Metric<T>) = Measure.create(
-    value = normalized.value / metric.multiplier.factor,
     metric = metric,
 )
 
@@ -52,6 +47,11 @@ operator fun <T> Measure<T>.plus(measure: Measure<T>) = Measure.create(
 operator fun <T> Measure<T>.minus(measure: Measure<T>) = Measure.create(
     value = normalized.value - measure.normalized.value,
     metric = metric.normalize(),
+)
+
+infix fun <T> Measure<T>.convertTo(metric: Metric<T>) = Measure.create(
+    value = normalized.value / metric.multiplier.factor,
+    metric = metric,
 )
 
 fun <T> List<Measure<T>>.combined() = this.reduce(Measure<T>::plus)

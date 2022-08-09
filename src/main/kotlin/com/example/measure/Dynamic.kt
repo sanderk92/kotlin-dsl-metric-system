@@ -29,12 +29,12 @@ class Dynamic<T, U> private constructor(val numerator: Measure<T>, val denominat
     }
 }
 
-infix fun <T, U> Measure<T>.per(metric: Metric<U>) = Dynamic.create(
+operator fun <T, U> Measure<T>.div(metric: Metric<U>) = Dynamic.create(
     numerator = this,
-    denominator = 1.of(metric),
+    denominator = 1(metric),
 )
 
-infix fun <T, U> Measure<T>.per(measure: Measure<U>) = Dynamic.create(
+operator fun <T, U> Measure<T>.div(measure: Measure<U>) = Dynamic.create(
     numerator = this,
     denominator = measure,
 )
