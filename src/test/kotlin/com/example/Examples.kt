@@ -22,7 +22,7 @@ class Examples {
         val tenKiloMeter = 10(Kilo.meter)
         val tenFemtoLiter = 10(Femto.liter)
 
-        val tenLiterMinusTenFemtoLiter = 10(liter) - 10(Femto.liter)
+        val tenWattMinusTenFemtoWatt = 10(watt) - 10(Kilo.watt)
         val tenSecondsPusTenMinutes = 10(second) + 10(minute)
 
         val tenNanoGramPerLiter = 10(Nano.gram) / liter
