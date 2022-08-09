@@ -35,7 +35,7 @@ val <T> Measure<T>.normalized get() = Measure.create(
 )
 
 infix fun <T> Number.of(metric: Metric<T>) = Measure.create(
-    value = asBigDecimal(),
+    value = this.toDouble().toBigDecimal(),
     metric = metric,
 )
 
@@ -57,6 +57,4 @@ operator fun <T> Measure<T>.minus(measure: Measure<T>) = Measure.create(
 fun <T> List<Measure<T>>.combined() = this.reduce(Measure<T>::plus)
 fun <T> List<Measure<T>>.deducted() = this.reduce(Measure<T>::minus)
 
-private fun Number.asBigDecimal() = this.toDouble().toBigDecimal()
-
-private operator fun BigDecimal.div(bigDecimal: BigDecimal) = divide(bigDecimal, MathContext.DECIMAL64)
+private operator fun BigDecimal.div(bigDecimal: BigDecimal) = divide(bigDecimal, MathContext.UNLIMITED)

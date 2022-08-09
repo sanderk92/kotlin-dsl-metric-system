@@ -37,3 +37,7 @@ infix fun <T, U> Measure<T>.per(measure: Measure<U>) = Dynamic.create(
     denominator = measure,
 )
 
+operator fun <T, U> Dynamic<T, U>.times(measure: Measure<U>) = Measure.create(
+    value = numerator.normalized.value * (measure.normalized.value / denominator.normalized.value),
+    metric = numerator.normalized.metric,
+)

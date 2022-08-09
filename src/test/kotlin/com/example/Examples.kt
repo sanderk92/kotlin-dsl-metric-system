@@ -28,6 +28,9 @@ class Examples {
         val tenNanoGramPerLiter = 10 of Nano.gram per liter
         val tenKiloWattPerHour = 10 of Kilo.watt per hour
 
+        val tenNanoGramPerLiterTimesTwoLiter = (10 of Nano.gram per liter) * (2 of liter)
+        val tenMeterPerSecondTimesTwoMinutes = (10 of meter per second) * (2 of minute)
+
         val tenGramPlusTenKiloGram = listOf(10 of gram, 10 of Kilo.gram).combined()
         val tenGramMinusTenKiloGram = listOf(10 of gram, 10 of Kilo.gram).deducted()
 
