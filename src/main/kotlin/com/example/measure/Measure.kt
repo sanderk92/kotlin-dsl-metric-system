@@ -29,7 +29,7 @@ class Measure<T> private constructor(val value: BigDecimal, val metric: Metric<T
     }
 }
 
-fun <T> Measure<T>.normalized() = Measure.create(
+val <T> Measure<T>.normalized get() = Measure.create(
     value = value * metric.multiplier.factor,
     metric = metric.normalize()
 )
@@ -40,19 +40,22 @@ infix fun <T> Number.of(metric: Metric<T>) = Measure.create(
 )
 
 infix fun <T> Measure<T>.convertedTo(metric: Metric<T>) = Measure.create(
-    value = normalized().value / metric.multiplier.factor,
+    value = normalized.value / metric.multiplier.factor,
     metric = metric,
 )
 
 operator fun <T> Measure<T>.plus(measure: Measure<T>) = Measure.create(
-    value = normalized().value + measure.normalized().value,
+    value = normalized.value + measure.normalized.value,
     metric = metric.normalize(),
 )
 
 operator fun <T> Measure<T>.minus(measure: Measure<T>) = Measure.create(
-    value = normalized().value - measure.normalized().value,
+    value = normalized.value - measure.normalized.value,
     metric = metric.normalize(),
 )
+
+fun <T> List<Measure<T>>.combined() = this.reduce(Measure<T>::plus)
+fun <T> List<Measure<T>>.deducted() = this.reduce(Measure<T>::minus)
 
 private fun Number.asBigDecimal() = this.toDouble().toBigDecimal()
 

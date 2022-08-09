@@ -28,6 +28,9 @@ class Examples {
         val tenNanoGramPerLiter = 10 of Nano.gram per liter
         val tenKiloWattPerHour = 10 of Kilo.watt per hour
 
+        val tenGramPlusTenKiloGram = listOf(10 of gram, 10 of Kilo.gram).combined()
+        val tenGramMinusTenKiloGram = listOf(10 of gram, 10 of Kilo.gram).deducted()
+
         val tenKilometerConvertedMeter = tenKiloMeter convertedTo meter
         val tenLiterConvertedToNanoLiter = tenLiter convertedTo Nano.liter
 
