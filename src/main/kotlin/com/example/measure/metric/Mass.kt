@@ -4,6 +4,7 @@ class Mass(multiplier: MetricMultiplier) : Metric<Mass>(multiplier, "g") {
     override fun normalize() = Mass(Base)
 }
 
-fun MetricMultiplier.gram(): Metric<Mass> = Mass(this)
+val gram: Metric<Mass> = Mass(Base)
+val MetricMultiplier.gram: Metric<Mass> get() = Mass(this)
 
-fun gram(): Metric<Mass> = Mass(Base)
+

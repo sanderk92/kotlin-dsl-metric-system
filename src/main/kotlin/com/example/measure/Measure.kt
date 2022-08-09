@@ -44,24 +44,14 @@ infix fun <T> Measure<T>.convertedTo(metric: Metric<T>) = Measure.create(
     metric = metric,
 )
 
-operator fun <T> Measure<T>.plus(other: Measure<T>) = Measure.create(
-    value = normalized().value + other.normalized().value,
+operator fun <T> Measure<T>.plus(measure: Measure<T>) = Measure.create(
+    value = normalized().value + measure.normalized().value,
     metric = metric.normalize(),
 )
 
-operator fun <T> Measure<T>.minus(other: Measure<T>) = Measure.create(
-    value = normalized().value - other.normalized().value,
+operator fun <T> Measure<T>.minus(measure: Measure<T>) = Measure.create(
+    value = normalized().value - measure.normalized().value,
     metric = metric.normalize(),
-)
-
-operator fun <T> Measure<T>.div(divisor: Number) = Measure.create(
-    value = value / divisor.asBigDecimal(),
-    metric = metric,
-)
-
-operator fun <T> Measure<T>.times(multiplier: Number) = Measure.create(
-    value = value * multiplier.asBigDecimal(),
-    metric = metric,
 )
 
 private fun Number.asBigDecimal() = this.toDouble().toBigDecimal()

@@ -4,6 +4,5 @@ class Power(multiplier: MetricMultiplier) : Metric<Power>(multiplier, "W") {
     override fun normalize() = Power(Base)
 }
 
-fun MetricMultiplier.watt(): Metric<Power> = Power(this)
-
-fun watt(): Metric<Power> = Power(Base)
+val watt: Metric<Power> = Power(Base)
+val MetricMultiplier.watt: Metric<Power> get() = Power(this)
