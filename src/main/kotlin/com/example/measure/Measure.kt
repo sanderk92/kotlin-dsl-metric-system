@@ -49,7 +49,7 @@ operator fun <T> Measure<T>.minus(measure: Measure<T>) = Measure.create(
     metric = metric.normalize(),
 )
 
-infix fun <T> Measure<T>.convertTo(metric: Metric<T>) = Measure.create(
+infix fun <T> Measure<T>.convertedTo(metric: Metric<T>) = Measure.create(
     value = normalized.value / metric.multiplier.factor,
     metric = metric,
 )
