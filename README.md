@@ -1,4 +1,4 @@
-# Metric System Kotlin DSL
+# Kotlin Metric System DSL
 
 An intuitive and easy to use Metric Unit DSL. 
 
