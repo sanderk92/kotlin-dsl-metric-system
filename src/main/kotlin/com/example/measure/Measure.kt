@@ -34,7 +34,12 @@ val <T> Measure<T>.normalized get() = Measure.create(
     metric = metric.normalize()
 )
 
-operator fun <T> Int.invoke(metric: Metric<T>) = Measure.create(
+operator fun <T> BigDecimal.invoke(metric: Metric<T>) = Measure.create(
+    value = this,
+    metric = metric,
+)
+
+operator fun <T> Number.invoke(metric: Metric<T>) = Measure.create(
     value = this.toDouble().toBigDecimal(),
     metric = metric,
 )
