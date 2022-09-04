@@ -1,4 +1,8 @@
-package com.example.measure.metric
+package com.example.measure.metrics
+
+import com.example.measure.Base
+import com.example.measure.Metric
+import com.example.measure.MetricMultiplier
 
 class Volume(multiplier: MetricMultiplier) : Metric<Volume>(multiplier, "l") {
     override fun normalize() = Volume(Base)

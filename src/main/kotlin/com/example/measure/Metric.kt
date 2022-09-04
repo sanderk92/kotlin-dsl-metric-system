@@ -1,9 +1,9 @@
-package com.example.measure.metric
+package com.example.measure
 
 import java.math.BigDecimal
 import kotlin.math.abs
 
-sealed class Metric<T>(val multiplier: MetricMultiplier, val suffix: String) {
+abstract class Metric<T>(val multiplier: MetricMultiplier, val suffix: String) {
 
     override fun equals(other: Any?): Boolean {
         if (other == null) return false
@@ -26,7 +26,7 @@ sealed class Metric<T>(val multiplier: MetricMultiplier, val suffix: String) {
     abstract fun normalize(): Metric<T>
 }
 
-sealed class MetricMultiplier(open val factor: BigDecimal, open val prefix: String)
+abstract class MetricMultiplier(open val factor: BigDecimal, open val prefix: String)
 
 object Yotta : MetricMultiplier(factor = 10.toThePowerOf(24), prefix = "Y")
 object Zetta : MetricMultiplier(factor = 10.toThePowerOf(21), prefix = "Z")

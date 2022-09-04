@@ -1,6 +1,5 @@
 package com.example.measure
 
-import com.example.measure.metric.Metric
 import java.math.BigDecimal
 import java.math.MathContext
 
@@ -29,11 +28,6 @@ class Measure<T> private constructor(val value: BigDecimal, val metric: Metric<T
     }
 }
 
-val <T> Measure<T>.normalized get() = Measure.create(
-    value = value * metric.multiplier.factor,
-    metric = metric.normalize()
-)
-
 operator fun <T> BigDecimal.invoke(metric: Metric<T>) = Measure.create(
     value = this,
     metric = metric,
@@ -54,12 +48,23 @@ operator fun <T> Measure<T>.minus(measure: Measure<T>) = Measure.create(
     metric = metric.normalize(),
 )
 
+fun <T> List<Measure<T>>.combined() = this.reduce(Measure<T>::plus)
+fun <T> List<Measure<T>>.reduced() = this.reduce(Measure<T>::minus)
+
+/**
+ * Convert this [Measure] to the specified representation
+ */
 infix fun <T> Measure<T>.convertedTo(metric: Metric<T>) = Measure.create(
     value = normalized.value / metric.multiplier.factor,
     metric = metric,
 )
 
-fun <T> List<Measure<T>>.combined() = this.reduce(Measure<T>::plus)
-fun <T> List<Measure<T>>.deducted() = this.reduce(Measure<T>::minus)
+/**
+ * Convert this [Measure] to its most basic representation
+ */
+val <T> Measure<T>.normalized get() = Measure.create(
+    value = value * metric.multiplier.factor,
+    metric = metric.normalize()
+)
 
 private operator fun BigDecimal.div(bigDecimal: BigDecimal) = divide(bigDecimal, MathContext.UNLIMITED)

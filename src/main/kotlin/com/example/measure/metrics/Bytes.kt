@@ -1,5 +1,6 @@
-package com.example.measure.metric
+package com.example.measure.metrics
 
+import com.example.measure.*
 import java.math.BigDecimal.ONE
 
 class Byte(multiplier: MetricMultiplier) : Metric<Byte>(multiplier, "b") {

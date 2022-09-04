@@ -1,5 +1,8 @@
-package com.example.measure.metric
+package com.example.measure.metrics
 
+import com.example.measure.Base
+import com.example.measure.Metric
+import com.example.measure.MetricMultiplier
 import java.math.BigDecimal
 
 // TODO TimeMultiplier feels like its incorrectly used for this metric

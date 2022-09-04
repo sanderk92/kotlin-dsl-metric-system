@@ -1,8 +1,7 @@
 package com.example.measure
 
 import com.example.measure.invoke
-import com.example.measure.metric.*
-import com.example.measure.normalized
+import com.example.measure.metrics.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -56,10 +55,21 @@ class MeasureTest {
     }
 
     @Test
+    fun `A list of measures can be reduced`() {
+        val values = listOf(30(Kilo.meter), 30(meter))
+        assertThat(values.reduced()).isEqualTo(29_970(meter))
+    }
+
+    @Test
     fun `Measure has the correct equals and hashcode`() {
         val first = 10(Kilo.meter)
         val second = 10(Kilo.meter)
+        val third = 100(Hecto.meter)
+
         assertThat(first == second && second == first)
         assertThat(first.hashCode() == second.hashCode())
+
+        assertThat(first != third && third != first)
+        assertThat(first.hashCode() != third.hashCode())
     }
 }
