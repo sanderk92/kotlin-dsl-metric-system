@@ -1,6 +1,7 @@
 package com.example.measure
 
 import com.example.measure.metrics.*
+import com.example.measure.metrics.Byte
 
 typealias Speed = Dynamic<Length, Time>
 typealias Energy = Dynamic<Power, Time>

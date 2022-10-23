@@ -26,6 +26,10 @@ val addition: Measure<Time> = 10(second) + 10(minute)
 val dynamic1: Dynamic<Mass, Volume> = 10(Nano.gram) / liter
 val dynamic2: Dynamic<Byte, Time> = 10(Giga.byte) / 2(hour)
 
+// Dynamics often have type aliases
+val dynamic1: Speed = 10(Kilo.meter) / hour
+val dynamic2: TransferRate = 10(Mega.byte) / second
+
 // Normalizing a Dynamic of two Measures by multiplying with a Measure
 val dynamicNormalized1: Measure<Mass> = 10(Nano.gram) / liter * 2(liter)
 val dynamicNormalized2: Measure<Length> = 10(meter) / day * 2(day)
