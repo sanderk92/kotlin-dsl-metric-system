@@ -4,8 +4,9 @@ import com.example.measure.Base
 import com.example.measure.Metric
 import com.example.measure.MetricMultiplier
 
-class Volume(multiplier: MetricMultiplier) : Metric<Volume>(multiplier, "l") {
+data class Volume(override val multiplier: MetricMultiplier) : Metric<Volume>(multiplier, "L") {
     override fun normalize() = Volume(Base)
+    override fun toString() = "${multiplier.prefix}${suffix}"
 }
 
 val liter: Metric<Volume> = Volume(Base)

@@ -50,13 +50,6 @@ class MetricTest {
         Assertions.assertThat(Pico.factor).isEqualTo(10.toThePowerOf(-12))
         Assertions.assertThat(Femto.factor).isEqualTo(10.toThePowerOf(-15))
     }
-
-    @Test
-    fun `Multipliers have the correct equals and hashcode`() {
-        Assertions.assertThat(Yotta == Yotta).isTrue
-        Assertions.assertThat(Yotta.hashCode() == Yotta.hashCode()).isTrue
-        Assertions.assertThat(Yotta.hashCode() != Kilo.hashCode()).isTrue
-    }
 }
 
 private fun Int.toThePowerOf(n: Int): BigDecimal = when {

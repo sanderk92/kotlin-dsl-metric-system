@@ -3,22 +3,7 @@ package com.example.measure
 import java.math.BigDecimal
 import kotlin.math.abs
 
-abstract class Metric<T>(val multiplier: MetricMultiplier, val suffix: String) {
-
-    override fun equals(other: Any?): Boolean {
-        if (other == null) return false
-        if (other === this) return true
-        if (other !is Metric<*>) return false
-        return other.multiplier == multiplier && other.suffix == suffix
-    }
-
-    override fun hashCode(): Int {
-        return multiplier.hashCode() + suffix.hashCode()
-    }
-
-    override fun toString(): String {
-        return "${multiplier.prefix}${suffix}"
-    }
+abstract class Metric<T>(open val multiplier: MetricMultiplier, val suffix: String) {
 
     /**
      * Normalize a [Metric] to its most basic representation.

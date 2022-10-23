@@ -5,10 +5,9 @@ import com.example.measure.Metric
 import com.example.measure.MetricMultiplier
 import java.math.BigDecimal
 
-// TODO TimeMultiplier feels like its incorrectly used for this metric
-
-class Time(multiplier: TimeMultiplier) : Metric<Time>(multiplier, multiplier.suffix) {
+data class Time(override val multiplier: TimeMultiplier) : Metric<Time>(multiplier, multiplier.suffix) {
     override fun normalize() = Time(Seconds(Base))
+    override fun toString() = "${multiplier.prefix}$suffix"
 }
 
 abstract class TimeMultiplier(multiplier: MetricMultiplier, seconds: BigDecimal, val suffix: String) :

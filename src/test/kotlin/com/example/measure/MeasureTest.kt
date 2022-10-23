@@ -39,7 +39,7 @@ class MeasureTest {
     @Test
     fun `A measure can be normalized`() {
         val values = 30(Kilo.meter)
-        assertThat(values.normalized).isEqualTo(30_000(meter))
+        assertThat(values.normalized()).isEqualTo(30_000(meter))
     }
 
     @Test
@@ -58,18 +58,5 @@ class MeasureTest {
     fun `A list of measures can be reduced`() {
         val values = listOf(30(Kilo.meter), 30(meter))
         assertThat(values.reduced()).isEqualTo(29_970(meter))
-    }
-
-    @Test
-    fun `Measure has the correct equals and hashcode`() {
-        val first = 10(Kilo.meter)
-        val second = 10(Kilo.meter)
-        val third = 100(Hecto.meter)
-
-        assertThat(first == second && second == first)
-        assertThat(first.hashCode() == second.hashCode())
-
-        assertThat(first != third && third != first)
-        assertThat(first.hashCode() != third.hashCode())
     }
 }

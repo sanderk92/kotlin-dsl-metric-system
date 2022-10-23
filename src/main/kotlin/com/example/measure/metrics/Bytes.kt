@@ -3,12 +3,13 @@ package com.example.measure.metrics
 import com.example.measure.*
 import java.math.BigDecimal.ONE
 
-class Byte(multiplier: MetricMultiplier) : Metric<Byte>(multiplier, "b") {
+data class Byte(override val multiplier: MetricMultiplier) : Metric<Byte>(multiplier, "b") {
     init {
         check(multiplier.factor >= ONE) { "Byte does not support multiplier '${multiplier}'" }
     }
 
     override fun normalize() = Byte(Base)
+    override fun toString() = "${multiplier.prefix}${suffix}"
 }
 
 val byte: Metric<Byte> = Byte(Base)
