@@ -24,7 +24,7 @@ data class Measure<T>(val value: BigDecimal, val metric: Metric<T>) : Comparable
         metric = metric.normalize(),
     )
 
-    infix fun <T> convertedTo(metric: Metric<T>) = Measure(
+    infix fun <T> `in`(metric: Metric<T>) = Measure(
         value = normalized().value.divide(metric.multiplier.factor, UNLIMITED),
         metric = metric,
     )

@@ -3,7 +3,6 @@ package com.example.measure
 import java.math.BigDecimal
 import kotlin.math.abs
 
-// TODO Individually test implementations
 abstract class Metric<T> {
     abstract val multiplier: MetricMultiplier
     abstract val suffix: String

@@ -32,7 +32,7 @@ class MeasureTest {
 
     @Test
     fun `A measure can be converted to a different multiplier`() {
-        assertThat(30(Kilo.meter) convertedTo meter).isEqualTo(30_000(meter))
+        assertThat(30(Kilo.meter) `in` meter).isEqualTo(30_000(meter))
     }
 
     @Test
