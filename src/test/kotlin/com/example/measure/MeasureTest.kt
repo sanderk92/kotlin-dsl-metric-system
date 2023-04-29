@@ -31,8 +31,19 @@ class MeasureTest {
     }
 
     @Test
+    fun `A measure can be multiplied`() {
+        assertThat(2(meter) * BigDecimal("10")).isEqualTo(20(meter))
+    }
+
+    @Test
+    fun `A measure can be divided`() {
+        assertThat(2(meter) / BigDecimal("100")).isEqualTo(0.02(meter))
+    }
+
+    @Test
     fun `A measure can be converted to a different multiplier`() {
         assertThat(30(Kilo.meter) `in` meter).isEqualTo(30_000(meter))
+        assertThat(30_000(meter) `in` meter).isEqualTo(30(Kilo.meter))
     }
 
     @Test
@@ -45,12 +56,6 @@ class MeasureTest {
     fun `A list of measures can be reduced`() {
         val values = listOf(30(Kilo.meter), 30(meter))
         assertThat(values.reduced()).isEqualTo(29_970(meter))
-    }
-
-    @Test
-    fun `A list of measures can be averaged`() {
-        val values = listOf(30(Kilo.meter), 30(meter))
-        assertThat(values.average()).isEqualTo(15015(meter))
     }
 
     @Test

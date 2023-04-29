@@ -14,11 +14,21 @@ class DynamicTest {
 
     @Test
     fun `A dynamic can be normalized`() {
-        val normalized = (30(Kilo.gram) / (Kilo.meter)).normalized()
+        val normalized = (30(Kilo.gram) / meter).normalized()
         assertThat(normalized.numerator.value).isEqualTo(BigDecimal(30_000))
         assertThat(normalized.numerator.metric).isEqualTo(gram)
-        assertThat(normalized.denominator.value).isEqualTo(BigDecimal(1000))
+        assertThat(normalized.denominator.value).isEqualTo(BigDecimal(1))
         assertThat(normalized.denominator.metric).isEqualTo(meter)
+    }
+
+    @Test
+    fun `A dynamic can be added to another dynamic`() {
+        assertThat(10(gram) / meter + 10(gram) / Kilo.meter).isEqualTo(10.010(gram) / meter)
+    }
+
+    @Test
+    fun `A dynamic can be subtracted from another dynamic`() {
+        assertThat(10(gram) / meter - 10(gram) / Kilo.meter).isEqualTo(9.990(gram) / meter)
     }
 
     @Test
@@ -27,20 +37,10 @@ class DynamicTest {
     }
 
     @Test
-    fun `A dynamic can be added to another dynamic`() {
-        assertThat(10(gram) / meter + 10(gram) / Kilo.meter).isEqualTo(10_010(gram) / meter)
-    }
-
-    @Test
-    fun `A dynamic can be subtracted from another dynamic`() {
-        assertThat(10(gram) / meter + 10(gram) / Kilo.meter).isEqualTo(9_990(gram) / meter)
-    }
-
-    @Test
     fun `compareTo is correctly implemented`() {
-        assertThat((10(meter) / gram).compareTo((5(meter)/ gram))).isEqualTo(1)
-        assertThat((10(Kilo.meter) / gram).compareTo((10(Kilo.meter)/ gram))).isEqualTo(0)
-        assertThat((10(Kilo.meter) / gram).compareTo((1(Kilo.meter)/ gram))).isEqualTo(-1)
+        assertThat((10(meter) / gram).compareTo((5(Milli.meter) / gram))).isEqualTo(1)
+        assertThat((10(meter) / gram).compareTo((10(meter) / gram))).isEqualTo(0)
+        assertThat((10(meter) / gram).compareTo((1(Kilo.meter) / gram))).isEqualTo(-1)
     }
 
     @Test
@@ -50,7 +50,7 @@ class DynamicTest {
 
     @Test
     fun `equals is correctly implemented`() {
-        assertThat(10_000(meter) / hour == 10(Kilo.meter) / hour).isFalse()
+        assertThat(10_000(meter) / hour == 10(Kilo.meter) / hour).isTrue()
         assertThat(10_000(meter) / hour == 5(Kilo.meter) / hour).isFalse()
     }
 

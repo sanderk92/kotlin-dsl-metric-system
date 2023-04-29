@@ -3,7 +3,7 @@ package com.example.measure
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 import java.math.MathContext
-import java.math.MathContext.UNLIMITED
+import java.math.MathContext.*
 
 data class Measure<T>(val value: BigDecimal, val metric: Metric<T>) : Comparable<Measure<T>> {
 
@@ -24,8 +24,18 @@ data class Measure<T>(val value: BigDecimal, val metric: Metric<T>) : Comparable
         metric = metric.normalize(),
     )
 
-    infix fun <T> `in`(metric: Metric<T>) = Measure(
-        value = normalized().value.divide(metric.multiplier.factor, UNLIMITED),
+    operator fun times(value: BigDecimal) = Measure(
+        value = normalized().value.multiply(value),
+        metric = metric
+    )
+
+    operator fun div(value: BigDecimal) = Measure(
+        value = normalized().value.divide(value, DECIMAL64),
+        metric = metric.normalize(),
+    )
+
+    infix fun `in`(metric: Metric<T>) = Measure(
+        value = (this / metric.multiplier.factor).value,
         metric = metric,
     )
 
@@ -70,9 +80,3 @@ operator fun <T> Double.invoke(metric: Metric<T>) = Measure(
  */
 fun <T> List<Measure<T>>.combined() = reduce(Measure<T>::plus)
 fun <T> List<Measure<T>>.reduced() = reduce(Measure<T>::minus)
-fun <T> List<Measure<T>>.average() = if (isNotEmpty()) reduce(Measure<T>::plus).div(size) else 0
-
-private fun <T> Measure<T>.div(value: Int) = Measure(
-    value = normalized().value.divide(BigDecimal(value), UNLIMITED),
-    metric = metric.normalize(),
-)
