@@ -22,6 +22,14 @@ val measure11: Measure<Volume> = 10(Femto.liter)
 val reduction: Measure<Power> = 10(watt) - 10(Kilo.watt)
 val addition: Measure<Time> = 10(second) + 10(minute)
 
+// Combining and reducing a list of Measures
+val combined = listOf(10(gram), 10(Kilo.gram)).combined()
+val reduced = listOf(10(Mega.byte), 10(Kilo.byte)).reduced()
+
+// Converting the multiplier of Measures
+val converted1 = 10(Kilo.meter) convertedTo meter
+val converted2 = 10(liter) convertedTo Nano.liter
+
 // Dynamic between two Measures
 val dynamic1: Dynamic<Mass, Volume> = 10(Nano.gram) / liter
 val dynamic2: Dynamic<Byte, Time> = 10(Giga.byte) / 2(hour)
@@ -30,17 +38,13 @@ val dynamic2: Dynamic<Byte, Time> = 10(Giga.byte) / 2(hour)
 val dynamic1: Speed = 10(Kilo.meter) / hour
 val dynamic2: TransferRate = 10(Mega.byte) / second
 
+// Basic operations on two Dynamics
+val reduction: Speed = 10(Kilo.meter) / hour - 5(Kilo.meter) / hour
+val addition: TransferRate = 10(Mega.byte) / hour + 10(byte) / minute
+
 // Normalizing a Dynamic of two Measures by multiplying with a Measure
 val dynamicNormalized1: Measure<Mass> = 10(Nano.gram) / liter * 2(liter)
 val dynamicNormalized2: Measure<Length> = 10(meter) / day * 2(day)
-
-// Combining and deducting a list of Measures
-val combined = listOf(10(gram), 10(Kilo.gram)).combined()
-val deducted = listOf(10(Mega.byte), 10(Kilo.byte)).deducted()
-
-// Converting the multiplier of Measures
-val converted1 = 10(Kilo.meter) convertedTo meter
-val converted2 = 10(liter) convertedTo Nano.liter
 
 // Support for all numbers and complex calculations
 val largeNumber = 10(Yotta.gram) / 10(Femto.meter) * 10(Yotta.meter) convertedTo Femto.gram

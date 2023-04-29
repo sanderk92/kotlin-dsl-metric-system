@@ -4,9 +4,10 @@ import com.example.measure.Base
 import com.example.measure.Metric
 import com.example.measure.MetricMultiplier
 
-data class Length(override val multiplier: MetricMultiplier) : Metric<Length>(multiplier, "m") {
-    override fun normalize() = Length(Base)
-    override fun toString() = "${multiplier.prefix}${suffix}"
+data class Length(override val multiplier: MetricMultiplier) : Metric<Length>() {
+    override val suffix: String = "m"
+    override fun normalize() = meter
+    override fun toString() = "${multiplier.prefix}$suffix"
 }
 
 val meter: Metric<Length> = Length(Base)

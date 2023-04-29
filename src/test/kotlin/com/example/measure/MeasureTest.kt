@@ -1,51 +1,38 @@
 package com.example.measure
 
-import com.example.measure.invoke
 import com.example.measure.metrics.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
+import java.math.BigDecimal.ONE
 
 class MeasureTest {
 
     @Test
-    fun `BigDecimals can be used to instantiate a measure`() {
-        val result = BigDecimal.ONE(meter)
-        assertThat(result.value).isEqualTo(BigDecimal.ONE)
-        assertThat(result.metric).isEqualTo(Base.meter)
-    }
-
-    @Test
-    fun `Numbers can be used to instantiate a measure`() {
-        val result = 1(meter)
-        assertThat(result.value).isEqualTo(BigDecimal.ONE)
-        assertThat(result.metric).isEqualTo(Base.meter)
-    }
-
-    @Test
-    fun `Two measures can be added`() {
-        val first = 2(meter)
-        val second = 1(meter)
-        assertThat(first + second).isEqualTo(3(meter))
-    }
-
-    @Test
-    fun `Two measures can be subtracted`() {
-        val first = 2(meter)
-        val second = 1(meter)
-        assertThat(first - second).isEqualTo(1(meter))
+    fun `Empty measure is correctly detected`() {
+        assertThat(0(meter).isEmpty()).isTrue()
     }
 
     @Test
     fun `A measure can be normalized`() {
-        val values = 30(Kilo.meter)
-        assertThat(values.normalized()).isEqualTo(30_000(meter))
+        val normalized = 30(Kilo.meter).normalized()
+        assertThat(normalized.value).isEqualTo(BigDecimal(30_000))
+        assertThat(normalized.metric).isEqualTo(meter)
+    }
+
+    @Test
+    fun `Two measures can be added`() {
+        assertThat(2(meter) + 1(meter)).isEqualTo(3(meter))
+    }
+
+    @Test
+    fun `Two measures can be subtracted`() {
+        assertThat(2(meter) - 1(meter)).isEqualTo(1(meter))
     }
 
     @Test
     fun `A measure can be converted to a different multiplier`() {
-        val value = 30(Kilo.meter)
-        assertThat(value convertedTo meter).isEqualTo(30_000(meter))
+        assertThat(30(Kilo.meter) convertedTo meter).isEqualTo(30_000(meter))
     }
 
     @Test
@@ -58,5 +45,51 @@ class MeasureTest {
     fun `A list of measures can be reduced`() {
         val values = listOf(30(Kilo.meter), 30(meter))
         assertThat(values.reduced()).isEqualTo(29_970(meter))
+    }
+
+    @Test
+    fun `A list of measures can be averaged`() {
+        val values = listOf(30(Kilo.meter), 30(meter))
+        assertThat(values.average()).isEqualTo(15015(meter))
+    }
+
+    @Test
+    fun `compareTo is correctly implemented`() {
+        assertThat(10(meter).compareTo(5(meter))).isEqualTo(1)
+        assertThat(10(Milli.meter).compareTo(10(Milli.meter))).isEqualTo(0)
+        assertThat(5(Kilo.meter).compareTo(10(Mega.meter))).isEqualTo(-1)
+    }
+
+    @Test
+    fun `toString is correctly implemented`() {
+        assertThat(10(meter).toString()).isEqualTo("10m")
+        assertThat(10(Kilo.meter).toString()).isEqualTo("10km")
+    }
+
+    @Test
+    fun `equals is correctly implemented`() {
+        assertThat(10_000(meter) == 10(Kilo.meter)).isTrue()
+        assertThat(10_000(meter) == 5(Kilo.meter)).isFalse()
+    }
+
+    @Test
+    fun `BigDecimals can be used to instantiate a measure`() {
+        val result = ONE(meter)
+        assertThat(result.value).isEqualTo(ONE)
+        assertThat(result.metric).isEqualTo(Base.meter)
+    }
+
+    @Test
+    fun `Integers can be used to instantiate a measure`() {
+        val result = 1(meter)
+        assertThat(result.value.compareTo(ONE)).isEqualTo(0)
+        assertThat(result.metric).isEqualTo(Base.meter)
+    }
+
+    @Test
+    fun `Doubles can be used to instantiate a measure`() {
+        val result = 1.0(meter)
+        assertThat(result.value.compareTo(ONE)).isEqualTo(0)
+        assertThat(result.metric).isEqualTo(Base.meter)
     }
 }

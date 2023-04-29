@@ -3,16 +3,14 @@ package com.example.measure
 import java.math.BigDecimal
 import kotlin.math.abs
 
-abstract class Metric<T>(open val multiplier: MetricMultiplier, val suffix: String) {
-
-    /**
-     * Normalize a [Metric] to its most basic representation.
-     */
+// TODO Individually test implementations
+abstract class Metric<T> {
+    abstract val multiplier: MetricMultiplier
+    abstract val suffix: String
     abstract fun normalize(): Metric<T>
 }
 
-abstract class MetricMultiplier(open val factor: BigDecimal, open val prefix: String)
-
+abstract class MetricMultiplier(val factor: BigDecimal, val prefix: String)
 object Yotta : MetricMultiplier(factor = 10.toThePowerOf(24), prefix = "Y")
 object Zetta : MetricMultiplier(factor = 10.toThePowerOf(21), prefix = "Z")
 object Exa : MetricMultiplier(factor = 10.toThePowerOf(18), prefix = "E")

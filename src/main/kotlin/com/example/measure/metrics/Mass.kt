@@ -4,9 +4,10 @@ import com.example.measure.Base
 import com.example.measure.Metric
 import com.example.measure.MetricMultiplier
 
-data class Mass(override val multiplier: MetricMultiplier) : Metric<Mass>(multiplier, "g") {
-    override fun normalize() = Mass(Base)
-    override fun toString() = "${multiplier.prefix}${suffix}"
+data class Mass(override val multiplier: MetricMultiplier) : Metric<Mass>() {
+    override val suffix: String = "g"
+    override fun normalize() = gram
+    override fun toString() = "${multiplier.prefix}$suffix"
 }
 
 val gram: Metric<Mass> = Mass(Base)

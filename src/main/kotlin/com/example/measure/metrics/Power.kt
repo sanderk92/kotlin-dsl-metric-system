@@ -4,9 +4,10 @@ import com.example.measure.Base
 import com.example.measure.Metric
 import com.example.measure.MetricMultiplier
 
-data class Power(override val multiplier: MetricMultiplier) : Metric<Power>(multiplier, "W") {
-    override fun normalize() = Power(Base)
-    override fun toString() = "${multiplier.prefix}${suffix}"
+data class Power(override val multiplier: MetricMultiplier) : Metric<Power>() {
+    override val suffix: String = "W"
+    override fun normalize() = watt
+    override fun toString() = "${multiplier.prefix}$suffix"
 }
 
 val watt: Metric<Power> = Power(Base)

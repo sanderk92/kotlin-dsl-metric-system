@@ -1,50 +1,78 @@
 package com.example.measure
 
 import java.math.BigDecimal
+import java.math.BigDecimal.ZERO
+import java.math.MathContext
 import java.math.MathContext.UNLIMITED
 
-operator fun <T> BigDecimal.invoke(metric: Metric<T>) = Measure.create(
-    value = this,
-    metric = metric,
-)
+data class Measure<T>(val value: BigDecimal, val metric: Metric<T>) : Comparable<Measure<T>> {
 
-operator fun <T> Number.invoke(metric: Metric<T>) = Measure.create(
-    value = this.toDouble().toBigDecimal(),
-    metric = metric,
-)
+    fun isEmpty() = value.compareTo(ZERO) == 0
 
-data class Measure<T>(val value: BigDecimal, val metric: Metric<T>) {
-
-    companion object {
-        fun <T> create(value: BigDecimal, metric: Metric<T>) = Measure(
-            value = value.stripTrailingZeros(),
-            metric = metric,
-        )
-    }
-
-    fun normalized() = create(
+    fun normalized() = Measure(
         value = value * metric.multiplier.factor,
         metric = metric.normalize()
     )
 
-    operator fun plus(other: Measure<T>) = create(
+    operator fun plus(other: Measure<T>) = Measure(
         value = normalized().value + other.normalized().value,
         metric = metric.normalize(),
     )
 
-    operator fun minus(other: Measure<T>) = create(
+    operator fun minus(other: Measure<T>) = Measure(
         value = normalized().value - other.normalized().value,
         metric = metric.normalize(),
     )
 
-    infix fun <T> convertedTo(metric: Metric<T>) = create(
+    infix fun <T> convertedTo(metric: Metric<T>) = Measure(
         value = normalized().value.divide(metric.multiplier.factor, UNLIMITED),
         metric = metric,
     )
 
-    override fun toString() = "${value.toPlainString()}$metric"
+    override fun compareTo(other: Measure<T>): Int =
+        (this - other).value.signum()
+
+    override fun toString(): String =
+        "${value.stripTrailingZeros().toPlainString()}$metric"
+
+    override fun hashCode(): Int =
+        normalized().let { value.hashCode() * metric.hashCode() * 31 }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        val left = this.normalized()
+        val right = (other as Measure<*>).normalized()
+        return left.metric == right.metric && left.value.compareTo(right.value) == 0
+    }
 }
 
-fun <T> List<Measure<T>>.combined() = this.reduce(Measure<T>::plus)
-fun <T> List<Measure<T>>.reduced() = this.reduce(Measure<T>::minus)
+/*
+    Creators
+ */
+operator fun <T> BigDecimal.invoke(metric: Metric<T>) = Measure(
+    value = this,
+    metric = metric,
+)
 
+operator fun <T> Int.invoke(metric: Metric<T>) = Measure(
+    value = this.toBigDecimal(),
+    metric = metric,
+)
+
+operator fun <T> Double.invoke(metric: Metric<T>) = Measure(
+    value = this.toBigDecimal(),
+    metric = metric,
+)
+
+/*
+    Combinators
+ */
+fun <T> List<Measure<T>>.combined() = reduce(Measure<T>::plus)
+fun <T> List<Measure<T>>.reduced() = reduce(Measure<T>::minus)
+fun <T> List<Measure<T>>.average() = if (isNotEmpty()) reduce(Measure<T>::plus).div(size) else 0
+
+private fun <T> Measure<T>.div(value: Int) = Measure(
+    value = normalized().value.divide(BigDecimal(value), UNLIMITED),
+    metric = metric.normalize(),
+)
