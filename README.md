@@ -25,8 +25,9 @@ val reduction1: Measure<Power> = 10(watt) - 10(Kilo.watt)
 val addition1: Measure<Time> = 10(second) + 10(minute)
 
 // Combining and reducing a list of Measures
-val combined: Measure<Mass> = listOf(10(gram), 10(Kilo.gram)).combined()
-val reduced: Measure<Byte> = listOf(10(Mega.byte), 10(Kilo.byte)).reduced()
+val combined: Measure<Mass> = listOf(10(Kilo.gram), 10(gram)).combined()
+val reduced: Measure<Byte> = listOf(10(Mega.byte), 10(byte)).reduced()
+val reduced: Measure<Length> = listOf(10(Kilo.meter), 10(meter)).average()
 
 // Converting the multiplier of Measures
 val converted1 = 10(Kilo.meter) `in` meter
@@ -44,8 +45,4 @@ val transferRate: TransferRate = 10(Mega.byte) / second
 val reduction: Speed = 10(Kilo.meter) / hour - 5(Kilo.meter) / hour
 val addition: TransferRate = 10(Mega.byte) / hour + 10(byte) / minute
 val multiplication: Measure<Mass> = 10(Nano.gram) / liter * 2(liter)
-
-// Support for all numbers and complex calculations
-val largeNumber = 10(Yotta.gram) / 10(Femto.meter) * 10(Yotta.meter) `in` Femto.gram
-val smallNumber = 10(Femto.watt) / 10(Yotta.meter) * 10(Femto.meter) `in` Yotta.watt
 ```

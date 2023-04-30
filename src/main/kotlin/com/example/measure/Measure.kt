@@ -80,3 +80,4 @@ operator fun <T> Double.invoke(metric: Metric<T>) = Measure(
  */
 fun <T> List<Measure<T>>.combined() = reduce(Measure<T>::plus)
 fun <T> List<Measure<T>>.reduced() = reduce(Measure<T>::minus)
+fun <T> List<Measure<T>>.average() = if (isEmpty()) 0 else reduce(Measure<T>::plus) / BigDecimal(size)

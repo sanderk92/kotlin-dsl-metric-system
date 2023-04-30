@@ -59,6 +59,12 @@ class MeasureTest {
     }
 
     @Test
+    fun `A list of measures can be averaged`() {
+        val values = listOf(30(Kilo.meter), 30(meter))
+        assertThat(values.average()).isEqualTo(15_015(meter))
+    }
+
+    @Test
     fun `compareTo is correctly implemented`() {
         assertThat(10(meter).compareTo(5(meter))).isEqualTo(1)
         assertThat(10(Milli.meter).compareTo(10(Milli.meter))).isEqualTo(0)
