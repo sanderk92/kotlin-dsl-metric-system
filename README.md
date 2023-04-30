@@ -9,12 +9,16 @@ val length: Measure<Length> = 10(meter)
 val mass: Measure<Mass> = 10(gram)
 val power: Measure<Power> = 10(watt)
 val byte: Measure<Byte> = 10(byte)
+
 val seconds: Measure<Time> = 10(second)
 val minutes: Measure<Time> = 10(minute)
 val hours: Measure<Time> = 10(hour)
 val days: Measure<Time> = 10(day)
+
 val euro: Measure<Euro> = 10(euro)
 val dollar: Measure<Dollar> = 10(dollar)
+val pound: Measure<Pound> = 10(pound)
+val yuan: Measure<Yuan> = 10(yuan)
 
 // Instantiating a Measure with a multiplier
 val kilometer: Measure<Length> = 10(Kilo.meter)
