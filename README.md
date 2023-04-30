@@ -34,8 +34,8 @@ val reduced: Measure<Byte> = listOf(10(Mega.byte), 10(byte)).reduced()
 val averaged: Measure<Length> = listOf(10(Kilo.meter), 10(meter)).average()
 
 // Converting the multiplier of Measures
-val converted1 = 10(Kilo.meter) `in` meter
-val converted2 = 10(liter) `in` Nano.liter
+val converted1: Measure<Length> = 10(Kilo.meter) `in` meter
+val converted2: Measure<Volume> = 10(liter) `in` Nano.liter
 
 // Dynamic between two Measures
 val dynamic1: Dynamic<Mass, Volume> = 10(Nano.gram) / liter
