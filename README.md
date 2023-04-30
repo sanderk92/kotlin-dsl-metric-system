@@ -31,7 +31,7 @@ val addition1: Measure<Time> = 10(second) + 10(minute)
 // Combining and reducing a list of Measures
 val combined: Measure<Mass> = listOf(10(Kilo.gram), 10(gram)).combined()
 val reduced: Measure<Byte> = listOf(10(Mega.byte), 10(byte)).reduced()
-val reduced: Measure<Length> = listOf(10(Kilo.meter), 10(meter)).average()
+val averaged: Measure<Length> = listOf(10(Kilo.meter), 10(meter)).average()
 
 // Converting the multiplier of Measures
 val converted1 = 10(Kilo.meter) `in` meter
